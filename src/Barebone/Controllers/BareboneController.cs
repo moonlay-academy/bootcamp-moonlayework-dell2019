@@ -3,17 +3,25 @@
 
 using Barebone.ViewModels.Barebone;
 using ExtCore.Data.Abstractions;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Barebone.Controllers
 {
-  public class BareboneController : ControllerBase
-  {
-    public BareboneController(IStorage storage) : base(storage) { }
-
-    public ActionResult Index()
+    public class BareboneController : ControllerBase
     {
-      return this.View(new IndexViewModelFactory().Create());
+        private readonly IConfiguration _configuration;
+
+        public BareboneController(IStorage storage, IConfiguration configuration) : base(storage)
+        {
+            _configuration = configuration;
+        }
+
+        public ActionResult Index()
+        {
+            return this.View(new IndexViewModelFactory().Create());
+        }
     }
-  }
 }

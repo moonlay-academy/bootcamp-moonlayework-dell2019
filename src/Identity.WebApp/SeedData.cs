@@ -1,16 +1,15 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-
-using System;
-using System.Linq;
-using System.Security.Claims;
 using IdentityModel;
 using IdentityWeb.Data;
 using IdentityWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using System.Security.Claims;
 
 namespace IdentityWeb
 {
@@ -74,13 +73,16 @@ namespace IdentityWeb
                         {
                             UserName = "bob"
                         };
+
                         var result = userMgr.CreateAsync(bob, "Pass123$").Result;
+
                         if (!result.Succeeded)
                         {
                             throw new Exception(result.Errors.First().Description);
                         }
 
                         result = userMgr.AddClaimsAsync(bob, new Claim[]{
+                        new Claim(JwtClaimTypes.Id, bob.Id),
                         new Claim(JwtClaimTypes.Name, "Bob Smith"),
                         new Claim(JwtClaimTypes.GivenName, "Bob"),
                         new Claim(JwtClaimTypes.FamilyName, "Smith"),

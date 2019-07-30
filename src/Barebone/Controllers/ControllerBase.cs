@@ -17,8 +17,8 @@ namespace Barebone.Controllers
 
         protected string GetCurrentUserName()
         {
-            var claim = (System.Security.Claims.ClaimsIdentity)User.Identity;
-            var name = claim.FindFirst("name");
+            var claims = (System.Security.Claims.ClaimsIdentity)User.Identity;
+            var name = claims.FindFirst("name");
 
             return name == null ? "Unknown" : name.Value;
         }

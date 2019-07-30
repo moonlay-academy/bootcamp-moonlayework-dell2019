@@ -1,19 +1,16 @@
-﻿using Barebone.Controllers;
-using Data.Entities;
-using Employees.Data.Abstractions;
+﻿using Employees.Data.Abstractions;
 using Employees.Data.Entities;
 using Employees.ViewModels.Employee;
 using ExtCore.Data.Abstractions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Employees.Controllers.Api
 {
-    [Authorize]
+    // [Authorize]
     [Route("api/employees")]
-    public class EmployeesController : ControllerBaseApi
+    public class EmployeesController : Barebone.Controllers.ControllerBase
     {
         public EmployeesController(IStorage storage) : base(storage)
         {
@@ -35,7 +32,7 @@ namespace Employees.Controllers.Api
         }
 
         [HttpPost]
-        public IActionResult Post(CreateViewModel model)
+        public IActionResult Post([FromBody] CreateViewModel model)
         {
             if (this.ModelState.IsValid)
             {
@@ -43,6 +40,7 @@ namespace Employees.Controllers.Api
                 var repo = this.Storage.GetRepository<IEmployeeRepository>();
 
                 repo.Create(employee, GetCurrentUserName());
+
                 this.Storage.Save();
 
                 return Ok(new { success = true });

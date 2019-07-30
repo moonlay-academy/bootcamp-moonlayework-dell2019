@@ -94,6 +94,7 @@ namespace IdentityWeb
                         GrantType.Hybrid
                     },
 
+
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())

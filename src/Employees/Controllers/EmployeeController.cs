@@ -16,6 +16,8 @@ namespace Employees.Controllers
 
         public ActionResult Index(int page = 0, int size = 25)
         {
+            var currentUser = this.GetCurrentUserName();
+
             return View(new EmployeeModelFactory().LoadAll(this.Storage, page, size));
         }
 

@@ -15,7 +15,7 @@ namespace Barebone.Controllers
             _imageService = imageService;
         }
 
-        // GET: Image  
+        // GET: Image
         public ActionResult Upload()
         {
             return View();

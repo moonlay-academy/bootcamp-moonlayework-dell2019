@@ -17,6 +17,8 @@ namespace Employees.Data.EntityFramework.SqlServer
                 etb.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 etb.Property(p => p.FirstName).HasMaxLength(64).IsRequired();
+                etb.Property(p => p.FullName).HasMaxLength(128);
+                etb.Property(p => p.Username).HasMaxLength(64).IsRequired();
 
                 etb.HasQueryFilter(m => m.IsDeleted == false);
             });

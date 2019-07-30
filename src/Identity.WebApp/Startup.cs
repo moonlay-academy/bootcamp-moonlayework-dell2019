@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using IdentityWeb.IdentityWeb.Models;
+using Identity.WebApp.Services;
 
 namespace IdentityWeb
 {
@@ -53,7 +54,8 @@ namespace IdentityWeb
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApis())
                 .AddInMemoryClients(Config.GetClients())
-                .AddAspNetIdentity<ApplicationUser>();
+                .AddAspNetIdentity<ApplicationUser>()
+                .AddProfileService<Services.ProfileService>();
 
             if (Environment.IsDevelopment())
             {
@@ -73,6 +75,8 @@ namespace IdentityWeb
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+
+            services.AddTransient<IEWorkConnection, EWorkConnection>();
                 
         }
 

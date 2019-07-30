@@ -55,22 +55,22 @@ namespace WebApplication
                 options.Scope.Add("ework");
                 options.Scope.Add("offline_access");
 
-                options.ClaimActions.MapJsonKey("website", "website");
+                options.ClaimActions.MapJsonKey("FullName", "FullName");
+                options.ClaimActions.MapJsonKey("EmployeeId", "EmployeeId");
+
             })
             .AddIdentityServerAuthentication(options =>
             {
-                options.Authority = "http://localhost:5000";
+                options.Authority = _configuration.GetValue<string>("IdentityServerAuthorizeUrl");
                 options.RequireHttpsMetadata = false;
 
                 options.ApiSecret = "secret";
                 options.ApiName = "ework";
             });
 
-
-
             services.Configure<StorageContextOptions>(options =>
                 {
-                    options.ConnectionString = this._configuration.GetConnectionString("SQlServer");
+                    options.ConnectionString = this._configuration.GetConnectionString("Default");
                     options.MigrationsAssembly = typeof(DesignTimeStorageContextFactory).GetTypeInfo().Assembly.FullName;
                 }
             );

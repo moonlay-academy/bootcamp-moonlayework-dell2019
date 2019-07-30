@@ -8,6 +8,10 @@ namespace Employees.Data.Entities
     {
         public string FirstName { get; set; }
 
+        public string FullName { get; set; }
+
+        public string Username { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
 

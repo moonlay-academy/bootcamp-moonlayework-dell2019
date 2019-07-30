@@ -19,5 +19,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
+    <PackageReference Include="SqlKata" Version="1.1.7" />
+    <PackageReference Include="SqlKata.Execution" Version="1.1.7" />
   </ItemGroup>
 </Project>
